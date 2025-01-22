@@ -1,0 +1,152 @@
+body {
+    background-image: radial-gradient(closest-side at 50% 135%, #ffffff 50%, #eceff1 100%);
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    width: 30%;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 9px 0px #d4d4d4;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px auto;
+}
+
+#form {
+    width: 80%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+
+}
+
+.registration {
+    display: none;
+}
+
+.error {
+    color: red;
+    font-size: larger;
+    display: none;
+}
+
+.error-border {
+    border: 5px solid red;
+}
+
+.valid-border {
+    border: 5px solid green;
+}
+
+.top-nav .logo img {
+    height: 50px;
+}
+
+.container .logo img {
+    width: 150px;
+    height: 100px;
+    margin: 30px;
+}
+
+#registrationButton {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #a09d9d;
+
+}
+a {
+    color: #a09d9d;
+    text-decoration: none;
+}
+/**********************************************/
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background-color: white;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    padding: 0.5rem;
+}
+
+.nav-links a:hover {
+    color: #333;
+}
+
+.premium-button {
+    background-color: #ffd700;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    border-top: 1px solid #e4e4e4;
+    bottom: 0;
+    width: 100%;
+}
+
+.bottom-nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #666;
+    font-size: 12px;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.language-selector img {
+    width: 20px;
+    height: 20px;
+}
