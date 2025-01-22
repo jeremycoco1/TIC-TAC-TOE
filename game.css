@@ -1,0 +1,63 @@
+
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+   
+body{
+  background-color:  #bdbdbd
+
+}
+.wrapperGame{
+    border-radius: 50px;
+    background-color: black;
+    display: flex;
+    height: 90vh;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    flex-direction: column;
+   
+}
+#titleContenair{
+   font-size: 4rem;
+    font-family: "Fredoka", serif; 
+}
+.colorful-text {
+    
+    
+    color: yellow; 
+}
+
+.colorful-text .red {
+    color: red; /
+}
+
+#grid {
+
+    height: 460px;
+    width: 620px;
+    margin: 0 auto;
+    display: grid;
+    /* justify-items: center; */
+    place-items: center;
+    background-color: #304ffe;
+}
+
+.cell {
+    height: 60px;
+    width: 60px;
+    aspect-ratio: 1 / 1;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 6px 3px;
+
+}
+
+.cell.player1 {
+    background-color: red;
+}
+
+.cell.player2 {
+    background-color: yellow;
+}
