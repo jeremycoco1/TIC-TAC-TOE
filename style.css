@@ -1,7 +1,7 @@
 body {
     background: url(/IMAGE/background.png) center / cover;
     margin: 0;
-    height: 85vh;
+    background-size: 100% 100vh;
 }
 
 .container {
@@ -38,9 +38,9 @@ label {
 input {
     width: 100%;
     padding: 10px;
-    font-size: 12px;
+    font-size: 15px;
     border: 1px solid #ccc;
-    border-radius: 2px;
+    border-radius: 5px;
     box-sizing: border-box;
 
 }
@@ -50,17 +50,21 @@ input {
 }
 
 .error {
-    color: red;
-    font-size: larger;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(201, 9, 9);
+    font-weight: bold;
+    font-size: 15px;
     display: none;
 }
 
 .error-border {
-    border: 5px solid red;
+    border: 3px solid red;
+    background-color: rgba(255, 0, 0, 0.406);
 }
 
 .valid-border {
-    border: 5px solid green;
+    border: 3px solid green;
+    background-color: #12c918;
 }
 
 .top-nav .logo img {
