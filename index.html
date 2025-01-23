@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="top-nav">
+            <div class="logo">
+                <img src="./IMAGE/game-3d-text-effect-with-background_598561-8005.jpg" alt="Logo">
+            </div>
+            <div class="nav-links">
+                <a href="#">Explore</a>
+                <a href="#" class="premium-button">Premium</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container">
+        
+        <div class="logo">
+            <img src="./IMAGE/game-3d-text-effect-with-background_598561-8005.jpg" alt="Logo">
+        </div>
+        <form id="form" action="" method="post">
+            <div class="form-group">
+                <input type="text" id="userName" name="userName" placeholder="Username">
+                <div class="error" id="userNameError">Username must contain 3-16 characters, letters and numbers only
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" id="password" name="password" placeholder="Password">
+                <div class="error" id="passwordError">Password must contain at least 8 characters, one letter and one
+                    number.</div>
+            </div>
+            <div class="form-group registration">
+                <input type="text" id="confirmPassword" name="confirmPassword" placeholder="Confirm password">
+                <div class="error" id="confirmPasswordError">Passwords must be the same</div>
+            </div>
+            <div class="form-group registration">
+                <input type="text" id="email" name="email" placeholder="E-mail address">
+                <div class="error" id="emailError">Invalid email address</div>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="submit" name="submit" value="Log-in">
+            </div>
+</div>
+        </form>
+        <div class="form-footer">
+            <button id="registrationButton">Sign Up</button>
+            <button id="logInButton">Sign In</button>
+            
+        </div>
+    </main>
+
+
+    <footer>
+        <nav class="bottom-nav">
+            <div class="bottom-nav-links">
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="reseau">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="language-selector">
+                <img src="Images/דגל ישראל.jpg" alt="Language">
+                <a href="">Hebrew</a>
+            </div>
+        </nav>
+    </footer>
+
+    <script src="form-page.js"></script>
+</body>
+
+</html>
