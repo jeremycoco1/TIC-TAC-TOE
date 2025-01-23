@@ -2,23 +2,25 @@
     @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
    
 body{
-  background-color:  #bdbdbd
-
+    /* background-color:  #bdbdbd; */
+    background-image: url('/Images/background.png'); 
+    background-size: 100% 100vh;
+  
 }
 .wrapperGame{
     border-radius: 50px;
-    background-color: black;
     display: flex;
     height: 90vh;
     width: fit-content;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     margin: auto;
     flex-direction: column;
-   
+    background-color: #7b1fa2bf;
+    
 }
 #titleContenair{
-   font-size: 4rem;
+    font-size: 4rem;
     font-family: "Fredoka", serif; 
 }
 .colorful-text {
@@ -60,4 +62,19 @@ body{
 
 .cell.player2 {
     background-color: yellow;
+}
+.messageContainer {
+    display: flex;
+    margin-top: 150px;
+    margin-left: 110px;
+    background-color: #7b1fa2bf;
+    border-radius: 5px;
+    width: 400px; 
+    flex-direction: column;
+    align-items: center;
+}
+.messege {
+    font-size: 4rem;
+    font-family: "Fredoka", serif; 
+    margin: 0;
 }
