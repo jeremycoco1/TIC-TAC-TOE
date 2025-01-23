@@ -1,4 +1,3 @@
-
 const form = document.getElementById("form"); // for submition
 const userName = document.getElementById("userName");
 const password = document.getElementById("password");
@@ -26,7 +25,7 @@ for (const item of Object.keys(patterns)) { // מעבר על מערך המפתח
 function checkValidation(pattern, input) {
     const value = input.value;
     const error = document.getElementById(`${input.name}Error`);
-    if (!pattern.test(value)) {//בודק אם הקלט תקין לתבנית הזו 
+    if (!pattern.test(value)) { //בודק אם הקלט תקין לתבנית הזו 
         //אם לא תקין
         input.classList.add('error-border');
         error.style.display = "block";
@@ -40,31 +39,41 @@ function checkValidation(pattern, input) {
         input.style.backgroundColor = "#6aa8f03b";
     }
 }
-confirmPassword.addEventListener('input',() => {
+confirmPassword.addEventListener('input', () => {
     const value = confirmPassword.value;
     const error = document.getElementById(`confirmPasswordError`);
-    if(isValidFormObj["password"] && (value === password.value)){
+    if (isValidFormObj["password"] && (value === password.value)) {
         isValidFormObj["confirmPassword"] = true;
         confirmPassword.classList.remove('error-border');
         confirmPassword.classList.add('valid-border');
         error.style.display = "none";
-    }else {
+    } else {
         confirmPassword.classList.add('error-border');
         confirmPassword.classList.remove('valid-border');
         error.style.display = "block";
         isValidFormObj["confirmPassword"] = false;
     }
 })
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const isAllValid = Object.values(isValidFormObj).every(input => input);
-    if (isAllValid) {
-        alert("good");
-        resetForm();
-    } else {
-        alert("not sented,try again");
-    }
-})
+// form.addEventListener('submit', (event) => {
+//     event.preventDefault();
+//     const isAllValid = Object.values(isValidFormObj).every(input => input);
+//     if (isAllValid) {
+//         console.log('tres bien')
+//         alert("good");
+//         resetForm();
+//     } else {
+//         resetForm();
+//         // alert("not sented,try again");
+
+//         // const submit = document.getElementById('submit');
+
+//         //     const link = document.createElement('a');
+//         //         link.href = "game.html";
+//         //         link.click();
+
+//     }
+// })
+
 
 function resetForm() {
     form.reset();
@@ -74,7 +83,83 @@ function resetForm() {
         isValidFormObj[item] = false;
     }
 }
+//////////local strorage//////////////
 
-const registrationButton = document.getElementById("registrationButton")
+let registration = []
+
+function setLocalStrorage(data) {
+    let storage = localStorage.getItem('dataRegistration')
+    const dataList = storage ? JSON.parse(storage) : []
+    dataList.push(data)
+    localStorage.setItem('dataRegistration', JSON.stringify(dataList))
+}
+
+const submit = document.getElementById('submit');
+const registrationButton = document.getElementById("registrationButton");
+
+registrationButton.addEventListener('click', () => {
+
+    const formFooter = document.querySelectorAll('.registration');
+
+    formFooter.forEach(element => {
+        element.style.display = 'block'
+    });
+
+    submit.value = 'Register'
+
+const loginButton = document.getElementById('logInButton');
+loginButton.style.display = 'block'
+})
 
 
+form.addEventListener('submit', (event) => {
+    if (submit.value === 'Register') {
+
+        event.preventDefault();
+        const isAllValid = Object.values(isValidFormObj).every(input => input);
+        if (isAllValid) {
+            let data = {
+                userName: userName.value,
+                password: password.value
+            }
+            setLocalStrorage(data);
+
+            console.log('tres bien')
+            alert("good");
+            resetForm();
+            const link = document.createElement('a');
+            link.href = "game.html";
+            link.click();
+
+        } else {
+            resetForm();
+            alert("not sented,try again");
+        }
+    }
+
+    if (submit.value === 'Log-in') {
+        let storage = localStorage.getItem('dataRegistration');
+        registration = JSON.parse(storage)
+
+        let checker = registration.some(user => user.userName === userName.value && user.password === password.value)
+
+        if (checker) {
+            const link = document.createElement('a');
+            link.href = "game.html";
+            link.click();
+        }
+    }
+})
+
+
+
+if (submit.value === 'Log-in') {
+    let storage = localStorage.getItem('dataRegistration');
+    registration = JSON.parse(storage)
+
+    let checker = registration.some(user => registration.userName === userName.value && registration.password === password.value)
+
+    if (checker) {
+
+    }
+}
