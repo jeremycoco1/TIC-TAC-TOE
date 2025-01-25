@@ -10,7 +10,6 @@ body{
 .wrapperGame{
     border-radius: 50px;
     display: flex;
-    height: 90vh;
     width: fit-content;
     align-items: center;
     justify-content: space-evenly;
@@ -92,6 +91,7 @@ h2 {
     font-family: "Fredoka", serif;
     margin: 10px;
     color: #071047;
+    border-bottom: 2px solid #071047;
 }
 #instructionsWrapper , #scoresWrapper {
     border-radius: 10px;
@@ -118,5 +118,11 @@ h2 {
     display: grid;
     /* justify-items: center; */
     place-items: center;
+    border: 2px solid #071047;
+    border-top: none;
+    border-radius: 10px;
+}
+#scoresGrid .cell {
+    cursor: none;
 }
 

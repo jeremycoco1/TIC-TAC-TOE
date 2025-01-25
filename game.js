@@ -70,6 +70,23 @@ function createGridPannel() {
 }
 createGridPannel()
 
+function createGridScores() {
+    const gridContenair = document.getElementById('scoresGrid');
+    gridContenair.style.gridTemplateColumns = `repeat(${2}, 1fr)`;
+    gridContenair.style.gridTemplateRows = `repeat(${2}, 1fr)`;
+    for (let row = 0; row < 2; row++) {
+        for (let col = 0; col < 2; col++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.scoreRow = row;
+            cell.dataset.scoreCol = col;
+            cell.style.visibility = 'hidden';
+            gridContenair.appendChild(cell);
+        }
+    }
+}
+createGridScores();
+
 let flag = true;
 
 function gameHandler(col) {
@@ -275,6 +292,18 @@ function resetPannel() {
         }
     }
 }
+function resetScores(){
+    for (let row = 0; row < 2; row++) {
+        for (let col = 0; col < 2; col++) {
+            const cell = document.querySelector(`[data-score-row='${row}'][data-score-col='${col}']`);
+            cell.classList.remove("player1");
+            cell.classList.remove("player2");
+            cell.style.visibility = 'hidden';
+        }
+    }
+    playersScores[1] = '0';
+    playersScores[2] = '0';
+}
 
 function createConfettiAnimation() {
 
@@ -294,7 +323,7 @@ function createConfettiAnimation() {
     messageContainer.classList.add('messageContainer');
     messageContainer.appendChild(message1);
     messageContainer.appendChild(message2);
-    container.appendChild(messageContainer);
+    
 
     const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
     const confettiCount = 100;
@@ -321,33 +350,36 @@ function createConfettiAnimation() {
     `;
     document.head.appendChild(style);
 
+    const newGameButton = document.createElement('button');
+    newGameButton.classList.add('message');
+    newGameButton.textContent = 'New Game';
+    newGameButton.style.backgroundColor = '#7b1fa2bf';
+    newGameButton.style.color = 'white';
+    newGameButton.style.border = '1px solid white';
+    newGameButton.style.padding = '5px 10px';
+    newGameButton.style.borderRadius = '8px';
+    newGameButton.style.cursor = 'pointer';
+    newGameButton.addEventListener('click', () => {
+        container.style.display = 'none';
+        resetPannel();
+        resetScores();
+    });
+    messageContainer.appendChild(newGameButton);
+    container.appendChild(messageContainer);
+    
     return container;
 }
 
-function createGridScores() {
-    const gridContenair = document.getElementById('scoresGrid');
-    gridContenair.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
-    gridContenair.style.gridTemplateRows = `repeat(${ROWS}, 1fr)`;
-    for (let row = 0; row < 2; row++) {
-        for (let col = 0; col < 2; col++) {
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-            cell.dataset.row = row;
-            cell.dataset.col = col;
-            cell.style.display = 'none';
-            gridContenair.appendChild(cell);
-        }
-    }
-}
-createGridScores();
+
 
 
 function updateScoresDisplay(row, col) {
-    const cell = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
+    const cell = document.querySelector(`[data-score-row='${row}'][data-score-col='${col}']`);
     if (cell) {
         cell.classList.add(`player${currentPlayer}`);
-        cell.style.display = 'block';
+        cell.style.visibility = 'visible';
     }
+
     checkFinalWinner();
 }
 
