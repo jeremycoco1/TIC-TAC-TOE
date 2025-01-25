@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style_1.css">
+</head>
+
+<body>
+    <div id="presentation">
+        <div id="titleContenair"></div>
+        <div id="subcontenair">
+            <img id="imgGame" src="./four-in_row.png" alt="">
+           <a href="./game.html"> <img class="bounce" src="./btn_strart.png" alt=""></a>
+        </div>
+    </div>
+    <script>
+        const text = "Four in a Row !";
+        const titleContenair = document.getElementById("titleContenair");
+        changTextStyle(text, titleContenair);
+        
+        function changTextStyle(text, element) {
+            let color = "red";
+            let colorfulText = "";
+            for (let i = 0; i < text.length; i++) {
+                if (text[i] === " ") {
+                    colorfulText += `<span style="color: ${color}"> </span>`;
+                } else {
+                    colorfulText += `<span style="color: ${color}">${text[i]}</span>`;
+                    if (color === "red") {
+                        color = "yellow";
+                    } else {
+                        color = "red";
+                    }
+                }
+            }
+            element.innerHTML = colorfulText;
+            element.style.fontWeight = 'bold';
+        }
+    </script>
+</body>
+
+</html>

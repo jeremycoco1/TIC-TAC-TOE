@@ -158,7 +158,7 @@ form.addEventListener('submit', (event) => {
             alert("good");
             resetForm();
             const link = document.createElement('a');
-            link.href = "game.html";
+            link.href = "prev-pan.html";
             link.click();
 
 
@@ -177,7 +177,7 @@ form.addEventListener('submit', (event) => {
         if (checker) {
 
             const link = document.createElement('a');
-            link.href = "game.html";
+            link.href = "prev-pan.html";
             link.click();
             resetForm();
         }
