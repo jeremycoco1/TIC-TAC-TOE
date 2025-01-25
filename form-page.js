@@ -111,14 +111,14 @@ function setLocalStrorage(data) {
 
 const submit = document.getElementById('submit');
 
-// submit.addEventListener("mouseover", () => {
-//     submit.style.backgroundColor = "#12c918";
-//     submit.style.cursor = 'pointer'
-// });
+submit.addEventListener("mouseover", () => {
+    submit.style.backgroundColor = "#12c918";
+    submit.style.cursor = 'pointer'
+});
 
-// submit.addEventListener("mouseout", () => {
-//     submit.style.backgroundColor = "white";
-// });
+submit.addEventListener("mouseout", () => {
+    submit.style.backgroundColor = "white";
+});
 const registrationButton = document.getElementById("registrationButton");
 
 registrationButton.addEventListener('click', () => {
@@ -179,8 +179,11 @@ form.addEventListener('submit', (event) => {
             const link = document.createElement('a');
             link.href = "game.html";
             link.click();
-            
+            resetForm();
         }
-       
+       else{
+        resetForm();
+        alert('you are not register. Please register first')
+       }
     }
 })

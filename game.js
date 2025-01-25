@@ -1,9 +1,16 @@
-// // Handle player move
+let gameRound = 1;
+updateGameRound(gameRound);
+function updateGameRound(roundNum) {
+    gameRound++;
+    const round = document.getElementById('round');
+    round.textContent = `Round ${roundNum}`;
+}
 
 // create a headline
 const text = "Four in a Row !";
 const titleContenair = document.getElementById("titleContenair");
 changTextStyle(text, titleContenair);
+
 function changTextStyle(text, element) {
     let color = "red";
     let colorfulText = "";
@@ -20,11 +27,14 @@ function changTextStyle(text, element) {
         }
     }
     element.innerHTML = colorfulText;
+    element.style.fontWeight = 'bold';
 }
 
 const ROWS = 6;
 const COLS = 7;
+
 let currentPlayer = 1;
+
 let playersScores = {
     1: 0,
     2: 0
@@ -59,20 +69,30 @@ function createGridPannel() {
 }
 createGridPannel()
 
+let flag = true;
 function gameHandler(col) {
     for (let row = ROWS - 1; row >= 0; row--) {
         if (grid[row][col] === null) {
             grid[row][col] = currentPlayer;
             updatePannelDisplay(row, col);
+
             if (checkWinner(row, col, currentPlayer)) {
 
-                console.log(currentPlayer)
-                setTimeout(() => {
-                    resetPannel();
-                    // alert(`${currentPlayer} wins!`);
-                }, 800);
+                updateGameRound(gameRound);
+                // console.log(currentPlayer);
                 updatePlayersScore(currentPlayer);
                 checkFinalWinner();
+
+                if (flag) {
+                    const victoryAnimation = displayVictoryAnimation();
+                    const grid = document.getElementById("grid");
+                    grid.appendChild(victoryAnimation);
+                    setTimeout(() => {
+                        resetPannel();
+                        // alert(`${currentPlayer} wins!`);
+                    }, 800);
+                }
+
             }
             currentPlayer = (currentPlayer === 1) ? 2 : 1;
 
@@ -81,15 +101,25 @@ function gameHandler(col) {
     }
 }
 
+
+
 function updatePlayersScore(currentPlayer) {
     if (currentPlayer === 1) {
         playersScores[1] += 1;
+        if (playersScores[1] === 1) {
+            updateScoresDisplay(1, 0);
+        } else {
+            updateScoresDisplay(0, 0);
+        }
     } else {
         playersScores[2] += 1;
+        if (playersScores[2] === 1) {
+            updateScoresDisplay(1, 1);
+        } else {
+            updateScoresDisplay(0, 1);
+        }
     }
     console.log(playersScores)
-    updateScoreDisplay();
-
 }
 
 function updatePannelDisplay(row, col) {
@@ -194,37 +224,41 @@ function checkWinner(row, col, currentPlayer) {
     }
     return false;
 }
-
-function displayInstructions(){
-    //"The young player is the starter.
-    //  Each player takes turns inserting one disc into the board.
-    //  The player must try to create a sequence of four discs
-    //  in a row, column, or diagonal, while simultaneously trying to
-    //  surround the opponent and prevent him from creating
-    //  a sequence with his discs. 
-    // The winner: The first player to create a sequence of 4 discs of the same color,
-    //  twice out of three games"
+let index = 0;
+function typeText(text, textElement, index = 0) {
+    if (index < text.length) {
+        textElement.textContent += text[index];
+        setTimeout(() => typeText(text, textElement, index + 1), 100);
+    }
 }
-
-function updateScoreDisplay() {
-    //להכניס דיב שמציג את התוצאות מחולק לכותרת "score" 
-    // ולשתי מיכלים שמחזיקים 3 cell כל אחד
-    checkFinalWinner();
+function displayInstructions() {
+    const instructions = document.getElementById('instructions');
+    const instructionsText = `The young player is the starter.
+    Each player takes turns inserting one disc into the board.
+    The player must try to create a sequence of four discs in a row, column, or diagonal.
+    The winner: The first player to create a sequence of 4 discs of the same color,
+    twice out of three games.`;
+    typeText(instructionsText, instructions);
 }
+displayInstructions();
+
 
 function checkFinalWinner() {
     Object.entries(playersScores).forEach(([key, value]) => {
         console.log(`Key: ${key}, Value: ${value}`);
-        if (value === 3) {
+        if (value === 2) {
             finalGame();
         }
     });
 }
 
 function finalGame() {
+    const round = document.getElementById('round');
+    round.style.display = 'none';
     const confettiContainer = createConfettiAnimation();
     const grid = document.getElementById("grid");
     grid.appendChild(confettiContainer);
+    flag = false;
 }
 
 function resetPannel() {
@@ -239,7 +273,7 @@ function resetPannel() {
 }
 
 function createConfettiAnimation() {
-    // Create a container div for the confetti
+
     const container = document.createElement('div');
     container.style.width = '620px';
     container.style.height = '460px';
@@ -249,8 +283,8 @@ function createConfettiAnimation() {
     const messageContainer = document.createElement('div');
     const message1 = document.createElement('p');
     const message2 = document.createElement('p');
-    changTextStyle(`player${currentPlayer}`,message1);
-    changTextStyle(`is the winner!`,message2);
+    changTextStyle(`player${currentPlayer}`, message1);
+    changTextStyle(`is the winner!`, message2);
     message1.classList.add('messege');
     message2.classList.add('messege');
     messageContainer.classList.add('messageContainer');
@@ -258,7 +292,6 @@ function createConfettiAnimation() {
     messageContainer.appendChild(message2);
     container.appendChild(messageContainer);
 
-    // Create confetti elements
     const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
     const confettiCount = 100;
 
@@ -275,7 +308,6 @@ function createConfettiAnimation() {
         container.appendChild(confetti);
     }
 
-    // Add CSS animation
     const style = document.createElement('style');
     style.innerHTML = `
       @keyframes fall {
@@ -284,6 +316,106 @@ function createConfettiAnimation() {
       }
     `;
     document.head.appendChild(style);
+
+    return container;
+}
+
+function createGridScores() {
+    const gridContenair = document.getElementById('scoresGrid');
+    gridContenair.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
+    gridContenair.style.gridTemplateRows = `repeat(${ROWS}, 1fr)`;
+    for (let row = 0; row < 2; row++) {
+        for (let col = 0; col < 2; col++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+            cell.style.display = 'none';
+            gridContenair.appendChild(cell);
+        }
+    }
+}
+function updateScoresDisplay(row, col) {
+    const cell = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
+    if (cell) {
+        cell.classList.add(`player${currentPlayer}`);
+        cell.style.display = 'block';
+    }
+    checkFinalWinner();
+}
+
+
+function displayVictoryAnimation() {
+    const container = document.createElement('div');
+    container.style.width = '620px';
+    container.style.height = '460px';
+    container.style.position = 'absolute';
+    container.style.overflow = 'hidden';
+    container.style.backgroundColor = '#7b1fa2bf';
+
+    const circleDelay = 200;
+    for (let i = 0; i < 4; i++) {
+        const circle = document.createElement('div');
+        circle.style.width = '60px';
+        circle.style.height = '60px';
+        if (currentPlayer === 1) {
+            circle.style.backgroundColor = 'red';
+        } else {
+            circle.style.backgroundColor = 'yellow';
+        }
+        circle.style.borderRadius = '50%';
+        circle.style.position = 'absolute';
+        circle.style.top = '-80px';
+        circle.style.left = `${170 + i * 70}px`;
+        
+        circle.style.animation = `fall${i} 1s ${i * circleDelay}ms ease-in-out forwards, bounce${i} 0.5s ${(i * circleDelay) + 1000}ms ease-in-out forwards`;
+        container.appendChild(circle);
+
+        const fallAnimation = document.createElement('style');
+        fallAnimation.innerHTML = `
+        @keyframes fall${i} {
+          0% { top: -80px; }
+          100% { top: 350px; }
+        }
+      `;
+        document.head.appendChild(fallAnimation);
+
+        const bounceAnimation = document.createElement('style');
+        bounceAnimation.innerHTML = `
+          @keyframes bounce${i} {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+          }
+        `;
+        document.head.appendChild(bounceAnimation);
+    }
+
+    const victoryContainer = document.createElement('div');
+    victoryContainer.classList.add('messageContainer');
+
+    const victoryMessage = document.createElement('h1');
+    changTextStyle('Victory!',victoryMessage);
+    victoryMessage.classList.add('messege');
+    victoryMessage.style.textAlign = 'center';
+    
+    victoryContainer.appendChild(victoryMessage);
+
+    const continueButton = document.createElement('button');
+    continueButton.classList.add('message');
+    continueButton.textContent = 'Next round';
+    continueButton.style.backgroundColor = '#7b1fa2bf';
+    continueButton.style.color = 'white';
+    continueButton.style.border = '1px solid white';
+    continueButton.style.padding = '5px 10px';
+    continueButton.style.borderRadius = '8px';
+    continueButton.style.cursor = 'pointer';
+    continueButton.addEventListener('click', () => {
+        container.style.display = 'none';
+    });
+    victoryContainer.appendChild(continueButton);
+
+    container.appendChild(victoryContainer);
 
     return container;
 }
