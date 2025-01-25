@@ -5,7 +5,7 @@ body{
     /* background-color:  #bdbdbd; */
     background-image: url('/Images/background.png'); 
     background-size: 100% 100vh;
-  
+    margin-top: 40px;
 }
 .wrapperGame{
     border-radius: 50px;
@@ -17,7 +17,6 @@ body{
     margin: auto;
     flex-direction: column;
     background-color: #7b1fa2bf;
-    
 }
 #titleContenair{
     font-size: 4rem;
@@ -72,9 +71,52 @@ body{
     width: 400px; 
     flex-direction: column;
     align-items: center;
+    
 }
 .messege {
     font-size: 4rem;
     font-family: "Fredoka", serif; 
     margin: 0;
 }
+
+#mainContainer {
+    
+    display: grid;
+    justify-items: center;
+    /* למקם לפי מרווחים מפוזרים ימין ושמאל */
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-family: "Fredoka", serif;
+    margin: 10px;
+    color: #071047;
+}
+#instructionsWrapper , #scoresWrapper {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+    background-color: #7b1fa2bf;
+    
+}
+
+#instructions {
+    font-size: 1.5rem;
+    font-family: "Fredoka", serif; 
+    padding: 15px;
+    margin: 10px;
+    white-space: pre-line;
+}
+
+#scoresGrid {
+    height: 153px;
+    width: 177px;
+    margin: 0 auto;
+    display: grid;
+    /* justify-items: center; */
+    place-items: center;
+}
+
