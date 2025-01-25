@@ -23,25 +23,28 @@ for (const item of Object.keys(patterns)) { // מעבר על מערך המפתח
     const input = form.elements[item];
     input.addEventListener('input', () => checkValidation(patterns[item], input));
 }
+
 function checkValidation(pattern, input) {
     const value = input.value;
     const error = document.getElementById(`${input.name}Error`);
-    
-    if (value.trim() === "") { 
+
+    if (value.trim() === "") {
         // באופן שזה ר'ק
         input.classList.add('error-border');
         input.classList.remove('valid-border');
         error.style.display = "block";
-    
+
         isValidFormObj[input.name] = false;
-    } else if (!pattern.test(value)) { 
+    } 
+    else
+        if (!pattern.test(value)) {
         // Cas où le champ est invalide (par exemple, moins de 3 lettres)
         input.classList.add('error-border');
         input.classList.remove('valid-border');
         error.style.display = "block";
-        
+
         isValidFormObj[input.name] = false;
-    } else { 
+    } else {
         // Cas valide
         input.classList.remove('error-border');
         input.classList.add('valid-border');
@@ -67,6 +70,8 @@ function checkValidation(pattern, input) {
 //         // input.style.backgroundColor = "#6aa8f03b";
 //     }
 // }
+
+
 confirmPassword.addEventListener('input', () => {
     const value = confirmPassword.value;
     const error = document.getElementById(`confirmPasswordError`);
@@ -105,6 +110,15 @@ function setLocalStrorage(data) {
 }
 
 const submit = document.getElementById('submit');
+
+// submit.addEventListener("mouseover", () => {
+//     submit.style.backgroundColor = "#12c918";
+//     submit.style.cursor = 'pointer'
+// });
+
+// submit.addEventListener("mouseout", () => {
+//     submit.style.backgroundColor = "white";
+// });
 const registrationButton = document.getElementById("registrationButton");
 
 registrationButton.addEventListener('click', () => {
@@ -159,15 +173,14 @@ form.addEventListener('submit', (event) => {
         registration = JSON.parse(storage)
 
         let checker = registration.some(user => user.userName === userName.value && user.password === password.value)
-console.log('hoho')
+        console.log('hoho')
         if (checker) {
-            
+
             const link = document.createElement('a');
             link.href = "game.html";
             link.click();
+            
         }
+       
     }
 })
-
-
-
