@@ -1,5 +1,6 @@
 let gameRound = 1;
 updateGameRound(gameRound);
+
 function updateGameRound(roundNum) {
     gameRound++;
     const round = document.getElementById('round');
@@ -70,6 +71,7 @@ function createGridPannel() {
 createGridPannel()
 
 let flag = true;
+
 function gameHandler(col) {
     for (let row = ROWS - 1; row >= 0; row--) {
         if (grid[row][col] === null) {
@@ -218,19 +220,21 @@ function checkSuccDiagRight(row, col, currentPlayer) {
 }
 
 function checkWinner(row, col, currentPlayer) {
-    if (checkSuccessionColums(row, col, currentPlayer) || checkSuccessionRows(row, col, currentPlayer)
-        || checkSuccDiagLeft(row, col, currentPlayer) || checkSuccDiagRight(row, col, currentPlayer)) {
+    if (checkSuccessionColums(row, col, currentPlayer) || checkSuccessionRows(row, col, currentPlayer) ||
+        checkSuccDiagLeft(row, col, currentPlayer) || checkSuccDiagRight(row, col, currentPlayer)) {
         return true
     }
     return false;
 }
 let index = 0;
+
 function typeText(text, textElement, index = 0) {
     if (index < text.length) {
         textElement.textContent += text[index];
         setTimeout(() => typeText(text, textElement, index + 1), 100);
     }
 }
+
 function displayInstructions() {
     const instructions = document.getElementById('instructions');
     const instructionsText = `The young player is the starter.
@@ -335,6 +339,9 @@ function createGridScores() {
         }
     }
 }
+createGridScores();
+
+
 function updateScoresDisplay(row, col) {
     const cell = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
     if (cell) {
@@ -367,7 +374,7 @@ function displayVictoryAnimation() {
         circle.style.position = 'absolute';
         circle.style.top = '-80px';
         circle.style.left = `${170 + i * 70}px`;
-        
+
         circle.style.animation = `fall${i} 1s ${i * circleDelay}ms ease-in-out forwards, bounce${i} 0.5s ${(i * circleDelay) + 1000}ms ease-in-out forwards`;
         container.appendChild(circle);
 
@@ -395,10 +402,10 @@ function displayVictoryAnimation() {
     victoryContainer.classList.add('messageContainer');
 
     const victoryMessage = document.createElement('h1');
-    changTextStyle('Victory!',victoryMessage);
+    changTextStyle('Victory!', victoryMessage);
     victoryMessage.classList.add('messege');
     victoryMessage.style.textAlign = 'center';
-    
+
     victoryContainer.appendChild(victoryMessage);
 
     const continueButton = document.createElement('button');
