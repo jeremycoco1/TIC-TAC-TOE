@@ -291,6 +291,10 @@ function resetPannel() {
             grid[row][col] = null;
         }
     }
+    //..........
+    currentPlayer = 1; // Reset to player 1's turn
+    flag = true; // Reactivate the flag for a new game
+    gameRound = 1; 
 }
 function resetScores(){
     for (let row = 0; row < 2; row++) {
@@ -301,8 +305,12 @@ function resetScores(){
             cell.style.visibility = 'hidden';
         }
     }
-    playersScores[1] = '0';
-    playersScores[2] = '0';
+    // playersScores[1] = '0';
+    // playersScores[2] = '0';
+    playersScores[1] = 0; 
+    playersScores[2] = 0; 
+
+   
 }
 
 function createConfettiAnimation() {
@@ -458,3 +466,4 @@ function displayVictoryAnimation() {
 
     return container;
 }
+
